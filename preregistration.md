@@ -4,7 +4,7 @@
 This study aims to replicate Stevens' Power Law for size perception.
 
 ## Hypotheses
-We hypothesize that perceived size will follow a power function with an exponent different from 1.
+We hypothesize that perceived size will follow a power function with an exponent different from 2.
 
 ## Methods
 Participants will compare squares of different sizes and judge which is larger.
