@@ -135,7 +135,7 @@ jobs:
                 '**Task:** Create a new issue in your repository!',
                 '- Go to the **Issues** tab.', 
                 '- Click **New Issue**.', 
-                '- Use this exact title: **Preregistration needed**.', 
+                '- Use this exact title: **Preregistration needed**', 
                 '- Add a brief introduction about yourself, what brings you to this workshop and what you\'re hoping to learn. Make sure to try different Markdown formatting options!', 
                 '', 
                 `**Afterwards:** Return to this issues and comment \`/done 4\` here: ${preregistrationUrl}`,
@@ -785,36 +785,60 @@ jobs:
           script: |
             const [owner, repo] = process.env.FORK_REPO.split('/');
             
-            // 1) Check for 2 contributors (excluding upstream contributors)
-            const { data: contributors } = await github.rest.repos.listContributors({
-              owner, repo,
-              per_page: 100
-            });
+            // 1) Check for 2 commit authors (excluding upstream contributors)
             
             // Get upstream contributors to exclude
-            const { data: upstreamContributors } = await github.rest.repos.listContributors({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              per_page: 100
-            });
-            
-            const upstreamLogins = upstreamContributors.map(c => c.login.toLowerCase());
-            
-            const validContributors = contributors.filter(c => 
-              !upstreamLogins.includes(c.login.toLowerCase())
-            );
+            let upstreamLogins = [];
+            try {
+              const { data: upstreamContributors } = await github.rest.repos.listContributors({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                per_page: 100
+              });
+              upstreamLogins = upstreamContributors.map(c => c.login.toLowerCase());
+            } catch (error) {
+              console.log('Could not fetch upstream contributors:', error.message);
+              // Continue with empty array as fallback
+            }
             
             // Skip check if comment was made by an upstream contributor
             const isUpstreamContributor = upstreamLogins.includes(context.actor.toLowerCase());
             
-            if (!isUpstreamContributor && validContributors.length < 2) {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body: '🚫 Milestone 9 not complete. We need both partners as contributors in the fork. Make sure you both committed something, then run `/done 9` again.'
-              });
-              return;
+            if (!isUpstreamContributor) {
+              // Use Commits API instead of Contributors API (much less caching!)
+              let validCommitAuthors = [];
+              
+              try {
+                const { data: commits } = await github.rest.repos.listCommits({
+                  owner, repo,
+                  per_page: 100  // Check last 100 commits
+                });
+                
+                // Get unique commit authors excluding upstream contributors
+                const commitAuthors = [...new Set(
+                  commits
+                    .map(c => c.author?.login)
+                    .filter(login => login && !upstreamLogins.includes(login.toLowerCase()))
+                )];
+                
+                validCommitAuthors = commitAuthors;
+                console.log('Valid commit authors found:', commitAuthors);
+                
+              } catch (error) {
+                console.log('Commits API error:', error.message);
+              }
+              
+              if (validCommitAuthors.length < 2) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  body: `🚫 Milestone 9 not complete. Found ${validCommitAuthors.length} partner(s) with commits: ${validCommitAuthors.join(', ')}. Both partners need to make commits (upload files, edit files, etc.). Then run \`/done 9\` again.`
+                });
+                return;
+              }
+              
+              console.log(`✅ Found ${validCommitAuthors.length} valid commit authors:`, validCommitAuthors);
             }
             
             // 2) Check for Data folder with files
