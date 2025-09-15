@@ -2,7 +2,7 @@
 
 ## Study Overview
 
-Psychophysics is the scientific study of the relationship between physical stimuli (like light, sound, or size) and our psychological perception of them.
+Psychophysics is the scientific study of the relationship between physical stimuli (like light, sound, or size) and our psychological perception of them!
 A fundamental question in this field is: when something in the world changes by a certain amount, how much does our perception of it change?
 
 > "The tower of Babel was never finished because the workers could not reach an understanding on how they should build it; my psychophysical edifice will stand because the workers will never agree on how to tear it down."  
