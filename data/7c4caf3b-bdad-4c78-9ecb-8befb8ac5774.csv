@@ -1,4 +1,4 @@
-"trial","ref_position","var_area","response","correct","rt"
+"new_trial","ref_position","var_area","response","correct","rt"
 1,"R",9.32826175843365,"L",TRUE,2.13300013542175
 2,"L",13.2561578874011,"L",FALSE,0.764000177383423
 3,"L",8.55011166981421,"L",TRUE,1.07800006866455
