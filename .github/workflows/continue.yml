@@ -679,7 +679,20 @@ jobs:
           github-token: ${{ secrets.GH_PAT_CROSSREPO }}
           script: |
             const [owner, repo] = process.env.FORK_REPO.split('/');
+
+            // Find the PR first
+            const { data: prs } = await github.rest.pulls.list({
+              owner, repo,
+              state: 'all',
+              per_page: 20,
+              sort: 'created',
+              direction: 'desc'
+            });
             
+            const ourPr = prs.find(pr =>
+              pr.title === 'Review this preregistration update'
+            );
+
             // Check if preregistration.md file exists in the fork
             let preregExists = false;
             try {
@@ -693,11 +706,12 @@ jobs:
             }
             
             if (!preregExists) {
+              const prUrl = ourPr ? ourPr.html_url : `https://github.com/${owner}/${repo}/pulls`;
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
-                body: `🚫 Milestone 7 not complete. Please merge or close the pull request: ${ourPr.html_url}. Make sure all checks have passed, then click "Merge pull request" and run \`/done 7\` again.`
+                body: `🚫 Milestone 7 not complete. Please merge or close the pull request: ${prUrl}. Make sure all checks have passed, then click "Merge pull request" and run \`/done 7\` again.`
               });
               return;
             }
@@ -752,6 +766,7 @@ jobs:
               issue_number: context.issue.number,
               body: workshopCompleteLines.join('\n')
             });
+            
       # Milestone 8: Build groups
       - name: Verify milestone 8
         if: steps.parse.outputs.result == '8'
