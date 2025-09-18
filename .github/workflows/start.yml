@@ -58,7 +58,7 @@ jobs:
             If you have a problem, a suggestion for improvement, or cool ideas during the workshop, please open an issue: https://github.com/${context.repo.owner}/${context.repo.repo}/issues/new
 
             Throughout the workshop, we use this issue to track your progress. 
-            Every time you reply with \`/done NUMBER\`, the list below gets updated.
+            Every time you comment with \`/done NUMBER\`, the list below gets updated.
 
             **Note**: Please complete the tasks in your forked repository, but always return to this issue in the original workshop repository to indicate that you’re done. 
             
@@ -124,7 +124,7 @@ jobs:
             1. Open your repository's **Settings**: https://github.com/${FORK_REPO}/settings  
             2. Scroll down to the **Features** section.  
             3. Check the box labeled **“Issues”**.  
-            4. When finished, reply here with \`/done 3\`.
+            4. When finished, comment here in this issue with \`/done 3\`.
             
             If something doesn’t match the documentation or you spot an anomaly, don’t hesitate to ask or to open an issue: https://github.com/${context.repo.owner}/${context.repo.repo}/issues/new
             In science, there are no silly questions, only hypotheses waiting to be tested. 
