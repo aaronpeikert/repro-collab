@@ -481,7 +481,7 @@ name: github
 
 ---
 
-## Socialogical
+## Sociological
 
 1. everything in one place
 2. the issue of trust
