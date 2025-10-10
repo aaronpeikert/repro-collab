@@ -510,6 +510,25 @@ template: github
 
 ---
 
+## Code of conduct 
+
+
+Before we get started, please note that this workshop follows the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/).
+
+We are here to learn together in a respectful and inclusive space.
+
+--
+
+Key principles for today:
+
+* Everyone is learning - questions and mistakes are welcome
+* Give feedback on code, not people
+* Help each other out when someone gets stuck
+
+---
+
+
+
 ## Get Active
 
 .left[
