@@ -544,7 +544,7 @@ Provide feedback: https://github.com/aaronpeikert/repro-collab/issues/new
 The next step is clear.
 
 1. Discussion
-2. Decission
+2. Decision
 2. Implementation
 
 ---
