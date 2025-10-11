@@ -513,7 +513,7 @@ template: github
 ## Code of conduct 
 
 
-Before we get started, please note that this workshop follows the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/).
+Before we get started, please note that this workshop follows the [Berlin Code of Conduct](https://github.com/aaronpeikert/repro-collab?tab=coc-ov-file#readme).
 
 We are here to learn together in a respectful and inclusive space.
 
@@ -521,6 +521,7 @@ We are here to learn together in a respectful and inclusive space.
 
 Key principles for today:
 
+* Participate authentically and actively
 * Everyone is learning - questions and mistakes are welcome
 * Give feedback on code, not people
 * Help each other out when someone gets stuck
