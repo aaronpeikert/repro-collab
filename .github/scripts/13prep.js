@@ -7,7 +7,7 @@ module.exports = async function ({ github, context, core, env }) {
         '### Task: Incorporate Feedback that comes in less than ideal form.',
         '',
         '**Why this matters:**',
-        'Some people do not have the time/energy/capacity/knowledge to use Git and that\'s OK Science should not depend (to much) on the tools used.',      
+        'Some people do not have the time/energy/capacity/knowledge to use Git and that\'s OK – Science should not depend (too much) on the tools used.',      
         '',
         '### Detailed Steps:',
         '',
