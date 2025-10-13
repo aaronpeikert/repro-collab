@@ -92,6 +92,22 @@ module.exports = async function ({ github, context, core, env }) {
         'Simply pick milestones that teach some skills you find useful. Everything >10 are delightful side quests.',
         '',
         '*It is unlikely that you manage to finish all sidequests in a day, they are only if you really want to dig deep.*',
+        '', 
+        'If you would like some guidance on how to proceed today, we offer a few recommendations below. Thematically, the remaining milestones can be grouped into two broader themes, but you can mix and match them depending on what you\'d like to practice.',
+        '', 
+        '**Track 1: Understanding Git (the system behind GitHub)**',
+        'If you\'d like to deepen your understanding of how Git works, these milestones are a great next step. They don\'t require you to have Git installed locally (unless noted).',
+        '* Milestone 15 – Learn Branching Interactively: a playful way to explore branching, suitable for all levels.', 
+        '* Milestone 16 – Time Travel in Git: explore version history and recovery (works in GitHub or Codespaces).',
+        '* Milestone 18 – Cherry-Pick Commits: makes most sense if you have Git installed locally and already feel more confident with it.', 
+        '', 
+        '**Track 2: Collaborative Practice on GitHub**', 
+        'If you\'d like to explore how teams use GitHub for research collaboration, try these. They vary in structure — some you can do solo, others with a partner.', 
+        '* Milestone 11 – Learn about GitHub Codespaces: recommended for everyone who doesn\'t know Codespaces before working jointly — you\'ll likely gladly use it during the exercises.', 
+        '* Milestone 12 – Create Private and Public Repositories: relevant when preparing papers or projects not yet public.', 
+        '* Milestone 13 – Work with People Who Don\'t Use Git/GitHub: includes a collaborative mini-exercise, similar to Milestone 10 but less structured.',
+        '* Milestone 14 – Use GitHub Labels: individual task, but very helpful for organizing teamwork.',
+        '* Milestone 17 – Force Complete File Reviews: collaborative feature practice, though not a joint workshop task.'
     ];
 
     await github.rest.issues.createComment({
