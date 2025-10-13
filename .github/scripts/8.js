@@ -22,6 +22,11 @@ module.exports = async function ({ github, context, core, env }) {
         body: [
             '## Collaborative Task: Generate and add data',
             '',
+            'For some of the options in this milestone, it\'s important to understand the **difference between Git and GitHub**.',
+            'GitHub — where we are now — is a platform built around the version control system Git. You can think of GitHub as cloud storage with collaboration tools, while Git is the underlying system that tracks changes to your files and lets you roll back to earlier versions when needed.', 
+            '', 
+            'So far, we\'ve only used GitHub in this workshop. In real projects, you’ll also use **Git locally** on your computer to track progress (via commits) and then **push** your changes to GitHub so others can access and contribute. Keep this distinction in mind when evaluating the options below.',
+            '', 
             'Before starting, decide between yourselves:',
             '- **Person A:** The **more** experienced',
             '- **Person B:** The **less** experienced',
