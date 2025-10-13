@@ -73,12 +73,6 @@ module.exports = async function ({ github, context, core, env }) {
         'Here we want you to simply try out a more messy, less structured collaboration with your partner by revising the preregistration. This is where you bring together everything you\'ve learned.',
         'To help you get started, we\'ve created a set of issues that outline specific improvements to make. Use these issues to assign tasks and coordinate your work.',
         '',
-        'However, there is so much to learn! From here on, you can choose to work on a number of **OPTIONAL** milestones, in **whatever order** you want.',
-        'So you could do `/done 14` and then `/done 10` if you wanted.',
-        'Simply pick milestones that teach some skills you find useful. Everything >10 are delightful side quests.',
-        '',
-        '*It is unlikely that you manage to finish all sidequests in a day, they are only if you really want to dig deep.*',
-        '',
         '**Task**: Revise the preregistration together',
         '* Use issues to **assign tasks**.',
         `1. [Decide on meta-comment](${issue1.data.html_url})`,
@@ -91,7 +85,13 @@ module.exports = async function ({ github, context, core, env }) {
         '* Use PRs to **discuss and improve** the changes.',
         '* **Close issues** once tasks are complete.',
         '',
-        `**When done:** Comment \`/done 10\` [in the tracking issue](${trackingIssueUrl})`
+        `**When done:** Comment \`/done 10\` [in the tracking issue](${trackingIssueUrl})`, 
+        '',
+        'However, there is so much to learn! From here on, you can choose to work on a number of **OPTIONAL** milestones, in **whatever order** you want.',
+        'So you could do `/done 14` and then `/done 10` if you wanted.',
+        'Simply pick milestones that teach some skills you find useful. Everything >10 are delightful side quests.',
+        '',
+        '*It is unlikely that you manage to finish all sidequests in a day, they are only if you really want to dig deep.*',
     ];
 
     await github.rest.issues.createComment({
