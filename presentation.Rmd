@@ -82,7 +82,7 @@ style_extra_css(css = list(".todo" = list(color = "#17C25B"),
 
 ### Aaron Peikert, Anabel Büchner & Hannes Diemerling
 
-*Don't make yourself to comfortable, you will have to change your seat in a minute.*
+*Don't make yourself too comfortable, you will have to change your seat in a minute.*
 
 ---
 class: middle, center
