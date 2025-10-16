@@ -42,21 +42,42 @@ module.exports = async function ({ github, context, core, env }) {
   }
 
   // Only provide format hint if it's a single-line comment containing "done"
+  // and the actor is not an upstream contributor
   if (isSingleLine && /done/i.test(cmd)) {
-    // User tried to use /done but with incorrect format
-    await github.rest.issues.createComment({
-      owner: context.repo.owner,
-      repo:  context.repo.repo,
-      issue_number: context.issue.number,
-      body: `⚠️ Your comment contains "done" but doesn't match the required format.\n\n` +
-            `**Required format:** \`/done N\` where N is the milestone number (3 or higher)\n\n` +
-            `**Common mistakes to avoid:**\n` +
-            `- Extra text before the command (e.g., \`I am /done 3\`)\n` +
-            `- Missing space after \`/done\` (e.g., \`/done3\`)\n` +
-            `- Additional text after the number (e.g., \`/done 3 now\`)\n` +
-            `- Using backslashes instead of forward slash (e.g., \`\\done 3\`)\n\n` +
-            `Please comment again with the correct format.`
-    });
+    // Get upstream contributors to exclude
+    let upstreamLogins = [];
+    try {
+      const { data: upstreamContributors } = await github.rest.repos.listContributors({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        per_page: 100
+      });
+      upstreamLogins = upstreamContributors.map(c => c.login.toLowerCase());
+    } catch (error) {
+      console.log('Could not fetch upstream contributors:', error.message);
+      // Continue with empty array as fallback
+    }
+
+    // Check if actor is an upstream contributor
+    const isUpstreamContributor = upstreamLogins.includes(context.actor.toLowerCase());
+
+    // Only show format hint if not an upstream contributor
+    if (!isUpstreamContributor) {
+      // User tried to use /done but with incorrect format
+      await github.rest.issues.createComment({
+        owner: context.repo.owner,
+        repo:  context.repo.repo,
+        issue_number: context.issue.number,
+        body: `⚠️ Your comment contains "done" but doesn't match the required format.\n\n` +
+              `**Required format:** \`/done N\` where N is the milestone number (3 or higher)\n\n` +
+              `**Common mistakes to avoid:**\n` +
+              `- Extra text before the command (e.g., \`I am /done 3\`)\n` +
+              `- Missing space after \`/done\` (e.g., \`/done3\`)\n` +
+              `- Additional text after the number (e.g., \`/done 3 now\`)\n` +
+              `- Using backslashes instead of forward slash (e.g., \`\\done 3\`)\n\n` +
+              `Please comment again with the correct format.`
+      });
+    }
   }
   return '-1';
 };
