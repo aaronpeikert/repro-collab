@@ -59,7 +59,7 @@ module.exports = async function ({ github, context, core, env }) {
             owner: context.repo.owner,
             repo: context.repo.repo,
             issue_number: context.issue.number,
-            body: `🚫 Milestone 6 not complete. Please add a suggestion to the PR using GitHub's suggestion feature. Go to the "Files changed" tab in your PR: ${pr.html_url}, click on a line and add a suggestion, then run \`/done 6\` again.`
+            body: `🚫 Milestone 6 not complete.\n\nPlease add a suggestion to the PR using GitHub's suggestion feature. Go to the "Files changed" tab in your PR: ${pr.html_url}, click on a line and add a suggestion, then run \`/done 6\` again.`
         });
         return;
     }
