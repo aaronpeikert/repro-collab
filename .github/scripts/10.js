@@ -3,11 +3,11 @@ module.exports = async function ({ github, context, core, env }) {
 
     // Verify all 5 issues from milestone 9 are closed
     const requiredIssueTitles = [
-        'Decide on meta-comment',
-        'Update number of participants',
-        'Correct materials\' description',
-        'Clarify procedure',
-        'Improve data analysis plan'
+        'Milestone 10: Decide on meta-comment',
+        'Milestone 10: Update number of participants',
+        'Milestone 10: Correct materials\' description',
+        'Milestone 10: Clarify procedure',
+        'Milestone 10: Improve data analysis plan'
     ];
 
     // Get all issues (open and closed)
