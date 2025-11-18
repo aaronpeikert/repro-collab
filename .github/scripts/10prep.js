@@ -11,6 +11,8 @@ module.exports = async function ({ github, context, core, env }) {
             'The quote in the study overview is kind of funny, but should we really keep it?',
             '- [ ] Make a decision to keep or remove it',
             '- [ ] Justify your decision',
+            '',
+            'In file `preregistration.md`',
         ].join('\n')
     });
     
@@ -23,6 +25,8 @@ module.exports = async function ({ github, context, core, env }) {
             'The preregistration currently says we\’ll collect data from five participants. But that number is clearly outdated — look how many we are!',
             '- [ ] Count the number of participants in the room',
             '- [ ] Update the number in the preregistration',
+            '',
+            'In file `preregistration.md`',
         ].join('\n')
     });
     
@@ -36,6 +40,8 @@ module.exports = async function ({ github, context, core, env }) {
             'These things need to be incorporated:',
             '- We are using a different data collection tool',
             '- We randomly generated the size of the comparison squares from a uniform distribution',
+            '',
+            'In file `preregistration.md`',
         ].join('\n')
     });
     
@@ -49,6 +55,8 @@ module.exports = async function ({ github, context, core, env }) {
             '- We didn\'t use a tachistoscope',
             '- We didn\'t categorize stimuli into three difficulty levels', 
             '- None of us will ever complete 6,850 (!!) trials', 
+            '',
+            'In file `preregistration.md`',
         ].join('\n')
     });
     
@@ -60,6 +68,8 @@ module.exports = async function ({ github, context, core, env }) {
             '',
             'So far, the preregistration says we\'ll plot the results for each participant and visually inspect the data.', 
             'That’s... certainly *one* way to approach it, but does anyone have a better idea?'
+            '',
+            'In file `preregistration.md`',
         ].join('\n')
     });
 
@@ -84,6 +94,8 @@ module.exports = async function ({ github, context, core, env }) {
         '* **Create PRs** when you\'re ready for feedback.',
         '* Use PRs to **discuss and improve** the changes.',
         '* **Close issues** once tasks are complete.',
+        '',
+        'All of these edits should affect the file `preregistration.md`.',
         '',
         `**When done:** Comment \`/done 10\` [in the tracking issue](${trackingIssueUrl})`, 
         '',

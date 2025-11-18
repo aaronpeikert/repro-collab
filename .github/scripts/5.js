@@ -72,7 +72,8 @@ module.exports = async function ({ github, context, core, env }) {
         owner: context.repo.owner, repo: context.repo.repo, path: 'prereg_draft.md'
     });
     const preregistrationContent = Buffer.from(preregDraft.content, 'base64').toString();
-    
+    const contentWithoutFirstLine = preregistrationContent.split('\n').slice(1).join('\n');
+
     // get current file sha if exists on new branch
     let fileSha = null;
     try {
@@ -85,7 +86,7 @@ module.exports = async function ({ github, context, core, env }) {
     await up.rest.repos.createOrUpdateFileContents({
         owner: context.repo.owner, repo: context.repo.repo, path: 'preregistration.md',
         message: `Update preregistration for ${context.actor}`,
-        content: Buffer.from(preregistrationContent).toString('base64'),
+        content: Buffer.from(contentWithoutFirstLine).toString('base64'),
         branch: branchName, sha: fileSha
     });
     
