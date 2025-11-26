@@ -65,13 +65,14 @@ module.exports = async function ({ github, context, core, env }) {
 
     // Get tracking issue URL
     const trackingIssueUrl = context.payload.issue.html_url;
+    const preregistrationUrl = 'https://github.com/' + owner + '/' + repo + '/main/preregistration.md'
 
     // Combined success comment for both milestones
     const body10 = [
         '**Milestone 10**',
         '',
         'Here we want you to simply try out a more messy, less structured collaboration with your partner by revising the preregistration. This is where you bring together everything you\'ve learned.',
-        'Both of you should please work on the preregistration document that is stored in the fork of Person B (i.e., the less experienced partner), which is called [preregistration.md](preregistration.md).',
+        'Both of you should please work on the preregistration document that is stored in the fork of Person B (i.e., the less experienced partner), which is called [preregistration.md](${preregistrationUrl}).',
         'To help you get started, we\'ve created a set of issues that outline specific improvements to make. Use these issues to assign tasks and coordinate your work.',
         '',
         '**Task**: Revise the preregistration together',
