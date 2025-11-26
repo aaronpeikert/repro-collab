@@ -1,6 +1,6 @@
 --- 
-title: "Reproducible Research"
-subtitle: "How to do the same thing more than once"
+title: "Reproducible Research in Collaboration"
+subtitle: "Writing Academic Texts on GitHub Together"
 author: "Aaron Peikert & Hannes Diemerling"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -18,12 +18,6 @@ links<-yaml::read_yaml("links.yml")
 source("functions.R")
 ```
 
-# Getting Started  {-}
-
-If you found your way to this page because you are currently participating in a workshop, thank you for attending!
-To start the workshop you need to [fork the repository aaronpeikert/repro-collab](https://github.com/aaronpeikert/repro-collab/fork).
-
-Then take a look at [the issues and find the one with your name](https://github.com/aaronpeikert/repro-collab/issues).
 
 # About {-}
 
