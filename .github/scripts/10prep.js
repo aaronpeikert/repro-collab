@@ -71,7 +71,7 @@ module.exports = async function ({ github, context, core, env }) {
         '**Milestone 10**',
         '',
         'Here we want you to simply try out a more messy, less structured collaboration with your partner by revising the preregistration. This is where you bring together everything you\'ve learned.',
-        'Both of you should please work on the preregistration document that is stored in the fork of Person B (i.e., the less experienced partner).', 
+        'Both of you should please work on the preregistration document that is stored in the fork of Person B (i.e., the less experienced partner), which is called [preregistration.md](preregistration.md).',
         'To help you get started, we\'ve created a set of issues that outline specific improvements to make. Use these issues to assign tasks and coordinate your work.',
         '',
         '**Task**: Revise the preregistration together',
