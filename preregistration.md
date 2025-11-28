@@ -41,10 +41,11 @@ Based on the theoretical framework and prior observations, we predict:
 
 ### Materials
 
+- We are using a different data collection tool, a shiny app that was used.
 
 - **Stimuli**: Black squares on a white background
   - Reference square: 9.00 sq.mm (constant)
-  - Comparison squares: 39 different sizes ranging from 8.00 to 15.00 sq.mm
+  - Comparison squares: We randomly generated the size of the comparison squares from a uniform distribution
   - This range includes squares both smaller and larger than the reference
 
 ### Procedure
