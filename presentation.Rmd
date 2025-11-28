@@ -2,7 +2,7 @@
 title: "Reproducible Research in Collaboration"
 subtitle: "Writing Academic Texts on GitHub Together"
 author: 
-  - "Aaron Peikert, Anabel Büchner & Hannes Diemerling"
+  - "Aaron Peikert & Anabel Büchner"
 date: '`r Sys.Date()`'
 output:
   xaringan::moon_reader:
