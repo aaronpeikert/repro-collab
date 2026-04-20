@@ -2,34 +2,6 @@ module.exports = async function ({ github, context, core, env }) {
     core.setOutput('validated', 'false');
     const [owner, repo] = process.env.FORK_REPO.split('/');
     
-    // 0) Check and close the data generation issue if still open
-    const { data: dataIssues } = await github.rest.issues.listForRepo({
-        owner, repo,
-        state: 'open',
-        per_page: 100
-    });
-    
-    const dataGenIssue = dataIssues.find(i => 
-        i.title === 'Generate and add research data'
-    );
-    
-    if (dataGenIssue) {
-        // Auto-close the data generation issue
-        await github.rest.issues.update({
-            owner, repo,
-            issue_number: dataGenIssue.number,
-            state: 'closed'
-        });
-        
-        await github.rest.issues.createComment({
-            owner, repo,
-            issue_number: dataGenIssue.number,
-            body: '✅ This issue has been automatically closed.\n\nMilestone 9 is being completed.'
-        });
-        
-        console.log(`Automatically closed data generation issue #${dataGenIssue.number}`);
-    }
-    
     // 1) Check for 2 commit authors (excluding upstream contributors)
     
     // Get upstream contributors to exclude
@@ -127,9 +99,35 @@ module.exports = async function ({ github, context, core, env }) {
         });
         return;
     }
-    core.setOutput('validated', 'true');
 
-    // ✅ Milestone 9 successful - now automatically trigger Milestone 10
+    // ✅ Validations passed - now close the data generation issue
+    const { data: openIssues } = await github.rest.issues.listForRepo({
+        owner, repo,
+        state: 'open',
+        per_page: 100
+    });
+
+    const dataGenIssue = openIssues.find(i => 
+        i.title === 'Generate and add research data'
+    );
+
+    if (dataGenIssue) {
+        await github.rest.issues.update({
+            owner, repo,
+            issue_number: dataGenIssue.number,
+            state: 'closed'
+        });
+
+        await github.rest.issues.createComment({
+            owner, repo,
+            issue_number: dataGenIssue.number,
+            body: '✅ This issue has been automatically closed.\n\nMilestone 9 is being completed.'
+        });
+
+        console.log(`Automatically closed data generation issue #${dataGenIssue.number}`);
+    }
+
+    core.setOutput('validated', 'true');
 
     // Fetch the latest issue body to avoid stale data
     const { data: currentIssue } = await github.rest.issues.get({
