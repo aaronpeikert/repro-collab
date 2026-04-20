@@ -20,4 +20,5 @@ Interested in how the automation works or want to host your own workshop?
 
 ## Code of Conduct
 
-This workshop follows the [Contributor Covenant Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
+Please note that this workshop follows the [Berlin Code of Conduct](https://berlincodeofconduct.org/).
+By participating in or contributing to the workshop, you agree to abide by its terms.
