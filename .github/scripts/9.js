@@ -2,37 +2,8 @@ module.exports = async function ({ github, context, core, env }) {
     core.setOutput('validated', 'false');
     const [owner, repo] = process.env.FORK_REPO.split('/');
     
-    // 0) Check and close the data generation issue if still open
-    const { data: dataIssues } = await github.rest.issues.listForRepo({
-        owner, repo,
-        state: 'open',
-        per_page: 100
-    });
+    // 1) Check and close the data generation issue if still open
     
-    const dataGenIssue = dataIssues.find(i => 
-        i.title === 'Generate and add research data'
-    );
-    
-    if (dataGenIssue) {
-        // Auto-close the data generation issue
-        await github.rest.issues.update({
-            owner, repo,
-            issue_number: dataGenIssue.number,
-            state: 'closed'
-        });
-        
-        await github.rest.issues.createComment({
-            owner, repo,
-            issue_number: dataGenIssue.number,
-            body: '✅ This issue has been automatically closed.\n\nMilestone 9 is being completed.'
-        });
-        
-        console.log(`Automatically closed data generation issue #${dataGenIssue.number}`);
-    }
-    
-    // 1) Check for 2 commit authors (excluding upstream contributors)
-    
-    // Get upstream contributors to exclude
     let upstreamLogins = [];
     try {
         const { data: upstreamContributors } = await github.rest.repos.listContributors({
@@ -43,23 +14,19 @@ module.exports = async function ({ github, context, core, env }) {
         upstreamLogins = upstreamContributors.map(c => c.login.toLowerCase());
     } catch (error) {
         console.log('Could not fetch upstream contributors:', error.message);
-        // Continue with empty array as fallback
     }
     
-    // Skip check if comment was made by an upstream contributor
     const isUpstreamContributor = upstreamLogins.includes(context.actor.toLowerCase());
     
     if (!isUpstreamContributor) {
-        // Use Commits API instead of Contributors API (much less caching!)
         let validCommitAuthors = [];
         
         try {
             const { data: commits } = await github.rest.repos.listCommits({
                 owner, repo,
-                per_page: 100  // Check last 100 commits
+                per_page: 100
             });
             
-            // Get unique commit authors excluding upstream contributors
             const commitAuthors = [...new Set(
                 commits
                 .map(c => c.author?.login)
@@ -86,7 +53,6 @@ module.exports = async function ({ github, context, core, env }) {
         console.log(`✅ Found ${validCommitAuthors.length} valid commit authors:`, validCommitAuthors);
     }
     
-    // 2) Check for Data folder with files
     let dataFiles = [];
     try {
         const { data: contents } = await github.rest.repos.getContent({
@@ -114,7 +80,6 @@ module.exports = async function ({ github, context, core, env }) {
                 );
             }
         } catch (error2) {
-            // Data folder doesn't exist
         }
     }
     
@@ -127,18 +92,41 @@ module.exports = async function ({ github, context, core, env }) {
         });
         return;
     }
+
+    const { data: openIssues } = await github.rest.issues.listForRepo({
+        owner, repo,
+        state: 'open',
+        per_page: 100
+    });
+
+    const dataGenIssue = openIssues.find(i => 
+        i.title === 'Generate and add research data'
+    );
+
+    if (dataGenIssue) {
+        await github.rest.issues.update({
+            owner, repo,
+            issue_number: dataGenIssue.number,
+            state: 'closed'
+        });
+
+        await github.rest.issues.createComment({
+            owner, repo,
+            issue_number: dataGenIssue.number,
+            body: '✅ This issue has been automatically closed.\n\nMilestone 9 is being completed.'
+        });
+
+        console.log(`Automatically closed data generation issue #${dataGenIssue.number}`);
+    }
+
     core.setOutput('validated', 'true');
 
-    // ✅ Milestone 9 successful - now automatically trigger Milestone 10
-
-    // Fetch the latest issue body to avoid stale data
     const { data: currentIssue } = await github.rest.issues.get({
         owner: context.repo.owner,
         repo: context.repo.repo,
         issue_number: context.issue.number
     });
 
-    // Update main issue - mark milestone 9 complete
     const updatedBody = currentIssue.body
     .replace(/^(\s*-\s*\[)\s\](\s*9\..*)$/m, '$1x]$2');
 
@@ -150,7 +138,6 @@ module.exports = async function ({ github, context, core, env }) {
         state: 'open'
     });
     
-    // Combined success comment for both milestones
     const completionBodyLines = [
         '**Great job on completing milestone 9** 🎉',
         '',
