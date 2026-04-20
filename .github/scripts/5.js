@@ -130,6 +130,8 @@ module.exports = async function ({ github, context, core, env }) {
         '  <img src="https://raw.githubusercontent.com/aaronpeikert/repro-collab/main/assets/addASuggestionSymbol_white.png" alt="add Suggestion symbol">',
         '</picture>',
         '\n',
+        '5. Click the green "Start a review" button.',
+        '6. Click the green "Submit review" button (feel free to add more comments before).',
         '**Note**: If you are not completely sure how to do it, please refer to the GIF at the end of this comment.',
         '',
         `**Afterwards:** Once you've suggested your change, return to ${context.payload.issue.html_url} and comment \`/done 6\` to continue`,
