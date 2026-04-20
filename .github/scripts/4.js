@@ -139,7 +139,7 @@ module.exports = async function ({ github, context, core, env }) {
             '',
             'Imagine your collaborators saw your reminder and quickly put together a first draft of the preregistration (how efficient!).',
             'In the next part of the workshop, you will help refine this preregistration.',
-            'But first, **close this issue** you since you completed the task. Closing issues when they are are no longer needed is good practice for keeping your repository organized.',
+            'But first, **close this issue** since you completed the task. Closing issues when they are no longer needed is good practice for keeping your repository organized.',
             '',
             '**Task:** Close this issue.',
             '',
