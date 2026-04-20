@@ -4,17 +4,12 @@ A workshop on collaborative academic writing using GitHub.
 
 ## Joining a Workshop
 
-**You should have received a link to fork this repository.**
+Simply start by [forking the repo](https://github.com/aaronpeikert/repro-collab/fork), then look for [an issue with your username](https://github.com/aaronpeikert/repro-collab/issues?q=is%3Aissue%20state%3Aopen%20label%3Anewfork).
 Forking is the entry point — the automated system will guide you from there.
-
-> **Note:** This workshop relies on automated GitHub Actions that are configured for specific workshop dates. If you are exploring outside of an official workshop, things may not work as expected. You are welcome to try, but there are no guarantees.
 
 ## Exploring on Your Own
 
-If you found this repository outside of a workshop, you can still browse the workshop materials:
-
-- The workshop content lives in [`self-paced-source/`](self-paced-source/)
-- A built version may be available on [GitHub Pages](https://aaronpeikert.github.io/repro-collab/)
+> **Note:** This workshop relies on automated GitHub Actions that are configured for specific workshop dates. If you are exploring outside of an official workshop, things may not work as expected. You are welcome to try, but there are no guarantees.
 
 ## For the Technically Curious
 
