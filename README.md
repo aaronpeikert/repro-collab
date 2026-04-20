@@ -16,7 +16,7 @@ Forking is the entry point — the automated system will guide you from there.
 Interested in how the automation works or want to host your own workshop?
 
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — setup instructions, hosting your own workshop, and development workflow
-- [`.github/workflows/`](.github/workflows/) — the GitHub Actions that power the onboarding system
+- [`.github/workflows/`](.github/workflows/) — the GitHub Actions that power the system
 
 ## Code of Conduct
 
