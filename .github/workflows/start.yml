@@ -51,8 +51,7 @@ jobs:
             Thank you for forking the repository and getting started with the workshop! 
             *Forking* means that you created a copy of the original workshop repository, whereas a *repository* is the central project folder in GitHub. 
             
-            The **Cheat Sheet** in the repository gives a quick overview of the key terms on GitHub and their core functions.
-            
+            The [**Cheat Sheet**](https://${context.repo.owner}.github.io/${context.repo.repo}/self-paced/cheat-sheet.html) in the repository gives a quick overview of the key terms on GitHub and their core functions.            
             Currently, you are in an *issue*, which is a way to track tasks, ideas, or bugs within a specific repository.
 
             If you have a problem, a suggestion for improvement, or cool ideas during the workshop, please open an issue: https://github.com/${context.repo.owner}/${context.repo.repo}/issues/new
