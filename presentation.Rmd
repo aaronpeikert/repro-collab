@@ -80,7 +80,7 @@ style_extra_css(css = list(".todo" = list(color = "#17C25B"),
 
 ### Writing Academic Texts on GitHub Together
 
-### Aaron Peikert, Anabel Büchner & Hannes Diemerling
+### Aaron Peikert & Laurenz Lammer
 
 *Don't make yourself too comfortable, you will have to change your seat in a minute.*
 
@@ -546,12 +546,12 @@ Key principles for today:
 
 .left[
 
-1. aaronpeikert.github.io/repro-collab/self-paced
+1. github.com/aaronpeikert/repro-collab/fork
 
 ]
 
 ```{r, echo=FALSE}
-link <- "aaronpeikert.github.io/repro-collab/self-paced"
+link <- "https://github.com/aaronpeikert/repro-collab/fork"
 ```
 
 ```{r, echo=FALSE, out.width = "30%", out.extra='style="float:center"'}
