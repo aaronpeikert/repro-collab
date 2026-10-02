@@ -1,14 +1,24 @@
-import { Readline } from 'xterm-readline';
-import './App.css';
-import { NamedObject, WebRDataJsAtomic } from '../webR/robj';
+import { Readline } from "xterm-readline";
+import "./App.css";
+import { NamedObject, WebRDataJsAtomic } from "../webR/robj";
 export interface TerminalInterface {
-    println: Readline['println'];
-    read: Readline['read'];
-    write: Readline['write'];
+    println: Readline["println"];
+    read: Readline["read"];
+    write: Readline["write"];
 }
 export interface FilesInterface {
     refreshFilesystem: () => Promise<void>;
-    openFileInEditor: (name: string, path: string, readOnly: boolean) => Promise<void>;
+    openFilesInEditor: (openFiles: {
+        name: string;
+        path: string;
+        readOnly?: boolean;
+        forceRead?: boolean;
+        execute?: boolean;
+    }[], replace?: boolean) => Promise<void>;
+    openContentInEditor: (openFiles: {
+        name: string;
+        content: Uint8Array;
+    }[], replace?: boolean) => void;
     openDataInEditor: (title: string, data: NamedObject<WebRDataJsAtomic<string>>) => void;
     openHtmlInEditor: (src: string, path: string) => void;
 }

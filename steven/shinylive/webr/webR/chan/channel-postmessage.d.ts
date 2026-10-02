@@ -6,12 +6,25 @@ export declare class PostMessageChannelMain extends ChannelMain {
     initialised: Promise<unknown>;
     resolve: (_?: unknown) => void;
     reject: (message: string | Error) => void;
-    close: () => void;
+    close: ChannelMain['close'];
+    emit: ChannelMain['emit'];
     constructor(config: Required<WebROptions>);
     interrupt(): void;
 }
 export declare class PostMessageChannelWorker {
     #private;
+    WebSocketProxy: {
+        new (url: string | URL, protocols?: string | string[]): WebSocket;
+        prototype: WebSocket;
+        readonly CONNECTING: 0;
+        readonly OPEN: 1;
+        readonly CLOSING: 2;
+        readonly CLOSED: 3;
+    } | undefined;
+    WorkerProxy: {
+        new (scriptURL: string | URL, options?: WorkerOptions): Worker;
+        prototype: Worker;
+    } | undefined;
     constructor();
     resolve(): void;
     write(msg: Message, transfer?: [Transferable]): void;
@@ -20,8 +33,9 @@ export declare class PostMessageChannelWorker {
     inputOrDispatch(): number;
     run(_args: string[]): void;
     setDispatchHandler(dispatch: (msg: Message) => void): void;
-    request(msg: Message, transferables?: [Transferable]): Promise<any>;
+    protected request(msg: Message, transferables?: [Transferable]): Promise<Message>;
+    syncRequest(): Message;
     setInterrupt(): void;
-    handleInterrupt(): void;
-    onMessageFromMainThread(message: Message): void;
+    handleEvents(): void;
+    resolveRequest(message: Message): void;
 }

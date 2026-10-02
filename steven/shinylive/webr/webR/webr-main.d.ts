@@ -75,22 +75,25 @@ export type FSNode = {
     };
 };
 /** An Emscripten Filesystem type */
-export type FSType = 'NODEFS' | 'WORKERFS' | 'IDBFS';
+export type FSType = 'NODEFS' | 'WORKERFS' | 'IDBFS' | 'DRIVEFS';
 /**
  * Configuration settings to be used when mounting Filesystem objects with
  * Emscripten
  */
-export type FSMountOptions<T extends FSType = FSType> = T extends 'NODEFS' ? {
+export type FSMountOptions<T extends FSType = FSType> = T extends 'DRIVEFS' ? {
+    driveName?: string;
+    browsingContextId?: string;
+} : T extends 'NODEFS' ? {
     root: string;
 } : {
     blobs?: Array<{
         name: string;
-        data: Blob | ArrayBufferLike;
+        data: Blob | Buffer | ArrayBufferLike | Uint8Array;
     }>;
     files?: Array<File | FileList>;
     packages?: Array<{
         metadata: FSMetaData;
-        blob: Blob | ArrayBufferLike;
+        blob: Blob | Buffer | ArrayBufferLike | Uint8Array;
     }>;
 };
 /**
@@ -103,6 +106,18 @@ export type FSMetaData = {
         end: number;
     }[];
     gzip?: boolean;
+};
+/** Emscripten filesystem entry information, as given by `FS.analyzePath()` */
+export type FSAnalyzeInfo = {
+    isRoot: boolean;
+    exists: boolean;
+    error: Error;
+    name: string;
+    path: string;
+    object?: FSNode;
+    parentExists: boolean;
+    parentPath: string;
+    parentObject?: FSNode;
 };
 /**
  * The configuration settings to be used when starting webR.
@@ -168,6 +183,7 @@ export declare class WebR {
     #private;
     globalShelter: Shelter;
     version: string;
+    versionR: string;
     RObject: ReturnType<typeof newRClassProxy<typeof RWorker.RObject, RObject>>;
     RLogical: ReturnType<typeof newRClassProxy<typeof RWorker.RLogical, RLogical>>;
     RInteger: ReturnType<typeof newRClassProxy<typeof RWorker.RInteger, RInteger>>;
@@ -209,6 +225,11 @@ export declare class WebR {
      */
     read(): Promise<Message>;
     /**
+     * Stream output messages from the communication channel via an async generator.
+     * @yields {Promise<Message>} Output messages from the communication channel.
+     */
+    stream(): AsyncGenerator<Message, void>;
+    /**
      * Flush the output queue in the communication channel and return all output
      * messages.
      * @returns {Promise<Message[]>} The output messages
@@ -249,9 +270,33 @@ export declare class WebR {
      * @returns {Promise<RObject>} The result of the computation.
      */
     evalR(code: string, options?: EvalROptions): Promise<RObject>;
+    /**
+     * Evaluate the given R code, returning a promise for no return data.
+     * @param {string} code The R code to evaluate.
+     * @param {EvalROptions} [options] Options for the execution environment.
+     * @returns {Promise<void>} A promise which fires when the R code completes, but returns no data.
+     */
     evalRVoid(code: string, options?: EvalROptions): Promise<void>;
+    /**
+     * Evaluate the given R code, returning a promise for a boolean value. If the returned R value is not a boolean, an error will be thrown.
+     * @param {string} code The R code to evaluate.
+     * @param {EvalROptions} [options] Options for the execution environment.
+     * @returns {Promise<boolean>} The result of the computation.
+     */
     evalRBoolean(code: string, options?: EvalROptions): Promise<boolean>;
+    /**
+     * Evaluate the given R code, returning a promise for a number. If the returned R value is not a number, an error will be thrown.
+     * @param {string} code The R code to evaluate.
+     * @param {EvalROptions} [options] Options for the execution environment.
+     * @returns {Promise<number>} The result of the computation.
+     */
     evalRNumber(code: string, options?: EvalROptions): Promise<number>;
+    /**
+     * Evaluate the given R code, returning a promise for a string. If the returned R value is not a string, an error will be thrown.
+     * @param {string} code The R code to evaluate.
+     * @param {EvalROptions} [options] Options for the execution environment.
+     * @returns {Promise<string>} The result of the computation.
+     */
     evalRString(code: string, options?: EvalROptions): Promise<string>;
     /**
      * Evaluate the given R code, returning the result as a raw JavaScript object.
@@ -269,11 +314,13 @@ export declare class WebR {
     evalRRaw(code: string, outputType: 'string[]', options?: EvalROptions): Promise<string[]>;
     invokeWasmFunction(ptr: EmPtr, ...args: number[]): Promise<EmPtr>;
     FS: {
+        analyzePath: (path: string, dontResolveLastLink?: boolean) => Promise<FSAnalyzeInfo>;
         lookupPath: (path: string) => Promise<FSNode>;
         mkdir: (path: string) => Promise<FSNode>;
         mount: <T extends FSType>(type: T, options: FSMountOptions<T>, mountpoint: string) => Promise<void>;
         syncfs: (populate: boolean) => Promise<void>;
         readFile: (path: string, flags?: string) => Promise<Uint8Array>;
+        rename: (oldpath: string, newpath: string) => Promise<void>;
         rmdir: (path: string) => Promise<void>;
         writeFile: (path: string, data: ArrayBufferView, flags?: string) => Promise<void>;
         unlink: (path: string) => Promise<void>;
