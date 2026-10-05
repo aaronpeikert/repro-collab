@@ -38,7 +38,7 @@ Based on the theoretical framework and prior observations, we predict:
 
 ### Participants
 
-Five participants with normal or corrected-to-normal vision will complete the study.
+24 participants with normal or corrected-to-normal vision will complete the study.
 
 ### Materials
 
