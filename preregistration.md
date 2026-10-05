@@ -1,4 +1,4 @@
-# Replication of Classic Psychophysical Research on Size Discrimination
+# Replication of Classic Psychophysical Research on Size Discrimination and Race Discrimination
 
 ## Study Overview
 
