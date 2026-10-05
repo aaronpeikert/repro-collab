@@ -69,53 +69,45 @@ Five participants with normal or corrected-to-normal vision will complete the st
 - **Accuracy**: Whether the participant correctly identified the larger square
 - **Stimulus difference**: The difference in area between comparison and reference squares (in sq.mm)
 
+Primary Analysis
+For each participant individually:
+
+Calculate median discrimination times for each stimulus difference
+Plot median discrimination time (y-axis) against stimulus difference in sq.mm (x-axis)
+Use hyperbolic coordinates to test whether the data follow the predicted reciprocal function
+Visual Inspection Criteria
+We will examine whether the data show:
+
+A horizontal line (constant discrimination time) for very small stimulus differences
+A transition point (likely corresponding to the JND)
+A negatively sloped line for larger stimulus differences (indicating faster discrimination as difference increases)
+Secondary Analyses
+Calculate error rates for each stimulus difference
+Identify the approximate location of the just noticeable difference (JND) as the point where the function transitions from flat to sloped
+Compare patterns across participants to assess consistency
+
 ## Analysis Plan
 
-### Data cleaning and exclusions
+### Primary Analysis
 
-Before analysis, we will inspect the raw trial data for missing responses, non-responses, and implausible reaction times. Trials with response times below 150 ms will be treated as anticipatory and excluded, and trials above 3,000 ms will be treated as outliers and excluded. We will also exclude trials with missing accuracy codes or invalid stimulus values. Exclusion criteria will be applied uniformly across participants before computing any summary statistics. Descriptive summaries of exclusions will be reported for transparency.
+For each participant individually:
 
-### Primary outcomes
+1. Calculate median discrimination times for each stimulus difference
+2. Plot median discrimination time (y-axis) against stimulus difference in sq.mm (x-axis)
+3. Use hyperbolic coordinates to test whether the data follow the predicted reciprocal function
 
-The primary outcomes are:
-1. Reaction time (RT) for correct trials, measured in milliseconds from stimulus onset to response.
-2. Accuracy (proportion correct) for each stimulus difference.
-3. The just noticeable difference (JND), defined as the stimulus difference at which performance shifts from near-chance to above-threshold discrimination.
+### Visual Inspection Criteria
 
-### Primary analysis
+We will examine whether the data show:
 
-For each participant, we will compute the median RT for correct responses at each absolute stimulus difference between the comparison square and the reference square. We will then plot median RT as a function of stimulus difference and fit a segmented or threshold model that captures the expected psychophysical pattern:
-- a relatively flat RT function for very small differences,
-- a transition point representing the JND,
-- a negative slope for larger differences, indicating faster discrimination as stimulus difference increases.
+- A horizontal line (constant discrimination time) for very small stimulus differences
+- A transition point (likely corresponding to the JND)
+- A negatively sloped line for larger stimulus differences (indicating faster discrimination as difference increases)
+- fit the function
+- Bootstrap test 
 
-To formally test the hypothesized relationship, we will fit a participant-level nonlinear regression using a piecewise function, with a change point at the JND. This model estimates the threshold at which RT begins to decrease systematically with stimulus difference. A reciprocal relationship will be considered supported if the fitted function shows a clear asymptotic decrease in RT with increasing difference above threshold.
+### Secondary Analyses
 
-To account for individual differences across participants, we will also fit a mixed-effects model with participant as a random effect:
-- RT ~ stimulus difference + threshold term + (1 | participant)
-
-This model will allow us to estimate whether the overall pattern is consistent across participants while preserving individual variability.
-
-### Accuracy and JND analyses
-
-Accuracy will be analyzed separately for each participant and stimulus difference. We will fit a psychometric function relating accuracy to stimulus difference and estimate the JND as the difference corresponding to a pre-specified performance criterion (e.g., 75% correct). This estimate will be compared with the threshold identified in the RT function. A converging pattern between the RT threshold and the accuracy-based JND would strengthen evidence for the psychophysical interpretation of the data.
-
-### Visual inspection criteria
-
-We will inspect the data for the expected pattern described by the classic psychophysical function:
-- near-zero differences yield slow and error-prone judgments,
-- RT and error rates decrease as the difference increases,
-- the transition from flat to sloped performance marks the JND,
-- overall responses are most consistent for larger stimulus differences.
-
-### Secondary analyses
-
-Secondary analyses will include:
-1. Comparison of median RT and accuracy across participants to assess consistency of the discrimination function;
-2. Examination of individual differences in the estimated JND and slope above threshold;
-3. Sensitivity checks excluding participants with unusually high error rates or extreme response variability;
-4. Descriptive summaries of mean accuracy, median RT, and the number of excluded trials by participant.
-
-### Reporting
-
-All analyses will be reported with effect estimates, uncertainty intervals, and plots of the fitted RT and accuracy functions. Results will be interpreted based on whether the observed data show the predicted threshold and negative relationship between stimulus difference and discrimination time.
+1. Calculate error rates for each stimulus difference
+2. Identify the approximate location of the just noticeable difference (JND) as the point where the function transitions from flat to sloped
+3. Compare patterns across participants to assess consistency
