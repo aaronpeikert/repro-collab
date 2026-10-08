@@ -49,12 +49,12 @@ If you already have a `GH_PAT_CROSSREPO` secret, create a new classic token with
 
 #### Activate GitHub Actions
 
-In your fork, got to Actions and activate Actions.
-There are a couple maintainance actions that use time based triggers, if you want those you have to activate them seperately.
+In your fork, go to _Actions_ and activate Actions.
+There are a couple of maintainance actions that use time-based triggers; if you want those you have to activate them seperately.
 
 #### Activate GitHub Pages
 
-You need to run the action `publish.yml` and activate GitHub Pages.
+You need to run the action `publish.yml` and activate _GitHub Pages_.
 
 ## License
 
@@ -116,7 +116,7 @@ The project includes Docker support for reproducible development:
 docker build -f Dockerfile .
 ```
 
-Uses `rocker/verse:4.5.0` base image with renv for dependency management.
+Uses `rocker/verse:4.5.0` base image with `renv` for dependency management.
 
 ## Project Structure
 
@@ -212,4 +212,4 @@ git checkout -b feature/your-feature-name
 
 Contributors will be acknowledged in the workshop materials. By contributing, you agree to the CC0 license terms and help make reproducible research more accessible to everyone.
 
-Thank you for helping improve reproducible research practices! 🎉
+🎉 Thank you for helping to improve reproducible research practices! 🎉
